@@ -7,10 +7,10 @@ function Display() {
   const { id } = useParams();
 
   async function download() {
-    const result = await downloadData({
+    const { body } = await downloadData({
       path: `upload/${id}`,
     }).result;
-    updateImg(result);
+    updateImg(body);
   }
 
   useEffect(() => {
@@ -24,7 +24,9 @@ function Display() {
   return (
     <div>
       <div>Image #{id} will go here I promise</div>
-      {/* <div>{img}</div> */}
+      <div>
+        <img src={img} />
+      </div>
     </div>
   );
 }

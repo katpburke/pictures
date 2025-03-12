@@ -4,6 +4,7 @@ import { uploadData } from 'aws-amplify/storage';
 function Uploader() {
   const [selectedFile, setFile] = useState(null);
   const [uploaded, updateUpload] = useState(false);
+  const [idUrl, updateIdUrl] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -27,6 +28,7 @@ function Uploader() {
       },
     });
     updateUpload(true);
+    updateIdUrl(`https://main.d25557zczawwec.amplifyapp.com/images/${imgId}`);
   };
 
   const handleReset = () => {
@@ -54,6 +56,9 @@ function Uploader() {
       {uploaded && (
         <div>
           <p>Image uploaded successfully!</p>
+          <p>
+            Access it <a href={idUrl}>here</a>.
+          </p>
           <button onClick={handleReset}>Click to upload another</button>
         </div>
       )}
