@@ -14,13 +14,15 @@ function Uploader() {
       return;
     }
 
+    console.log('selected file: ', selectedFile);
+
     const imgId = Math.floor(Math.random() * 1000000);
     console.log(imgId);
 
     uploadData({
       path: `upload/${imgId}`,
       data: selectedFile,
-      option: {
+      options: {
         contentType: 'image/jpeg',
       },
     });
