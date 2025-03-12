@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { uploadData } from 'aws-amplify/storage';
 
 function Uploader() {
   const [selectedFile, setFile] = useState(null);
@@ -12,18 +13,30 @@ function Uploader() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('file', selectedFile);
+    const imgId = Math.floor(Math.random * 1000000);
+    selectedFile.name = imgId;
+
+    // const formData = new FormData();
+    // formData.append('file', selectedFile);
 
     //here is where a fetch request goes, uploading the file
     //for now:
 
-    console.log('File uploaded');
+    // console.log('File uploaded: ', formData);
+
+    uploadData({
+      path: `upload/${imgId}`,
+      data: selectedFile,
+    });
   };
 
   return (
     <div>
-      <input type='file' onChange={(e) => handleFileChange(e)} />
+      <input
+        type='file'
+        accept='image/*'
+        onChange={(e) => handleFileChange(e)}
+      />
       {selectedFile && (
         <div>
           <p>Selected file: {selectedFile.name}</p>
