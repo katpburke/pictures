@@ -18,10 +18,10 @@ function Uploader() {
     console.log(imgId);
 
     uploadData({
-      path: `images/${imgId}`,
+      path: `upload/${imgId}`,
       data: selectedFile,
       option: {
-        contentType: 'image/*',
+        contentType: 'image/jpeg',
       },
     });
     updateUpload(true);

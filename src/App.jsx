@@ -12,8 +12,10 @@ function App() {
   return (
     <div>
       <Router>
-        <Route path='/' element={<Uploader />} />
-        <Route path='/images/:id' element={<Display />} />
+        <Routes>
+          <Route path='/' element={<Uploader />} />
+          <Route path='/images/:id' element={<Display />} />
+        </Routes>
       </Router>
     </div>
   );
