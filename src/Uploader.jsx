@@ -3,6 +3,7 @@ import { uploadData } from 'aws-amplify/storage';
 
 function Uploader() {
   const [selectedFile, setFile] = useState(null);
+  const [uploaded, updateUpload] = useState(false);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -13,33 +14,42 @@ function Uploader() {
       return;
     }
 
-    const imgId = Math.floor(Math.random * 1000000);
-
-    // const formData = new FormData();
-    // formData.append('file', selectedFile);
-
-    //here is where a fetch request goes, uploading the file
-    //for now:
-
-    // console.log('File uploaded: ', formData);
+    const imgId = Math.floor(Math.random() * 1000000);
+    console.log(imgId);
 
     uploadData({
       path: `upload/${imgId}`,
       data: selectedFile,
     });
+    updateUpload(true);
+  };
+
+  const handleReset = () => {
+    setFile(null);
+    updateUpload(false);
   };
 
   return (
     <div>
-      <input
-        type='file'
-        accept='image/*'
-        onChange={(e) => handleFileChange(e)}
-      />
+      {!uploaded && (
+        <div>
+          <input
+            type='file'
+            accept='image/*'
+            onChange={(e) => handleFileChange(e)}
+          />
+        </div>
+      )}
       {selectedFile && (
         <div>
           <p>Selected image: {selectedFile.name}</p>
           <button onClick={handleUpload}>Upload</button>
+        </div>
+      )}
+      {uploaded && (
+        <div>
+          <p>Image uploaded successfully!</p>
+          <button onClick={handleReset}>Click to upload another</button>
         </div>
       )}
     </div>
