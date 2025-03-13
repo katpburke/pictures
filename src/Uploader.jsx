@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { uploadData } from 'aws-amplify/storage';
 import { generateClient } from 'aws-amplify/data';
 
@@ -7,6 +8,7 @@ function Uploader() {
   const [uploaded, updateUpload] = useState(false);
   const [idUrl, updateIdUrl] = useState(null);
   const [idList, updateList] = useState([]);
+  const navigate = useNavigate();
   //   const __dirname = path.resolve();
   const client = generateClient();
 
@@ -70,6 +72,11 @@ function Uploader() {
 
   useEffect(() => {
     console.log('idList: ', idList);
+    if (idList.length > 0) {
+      let rand = Math.floor(Math.random() * idList.length);
+      console.log('random index chosen: ', rand);
+      navigate(`/images/${idList[rand]}`);
+    }
   }, [idList]);
 
   return (
