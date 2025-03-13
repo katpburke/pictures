@@ -27,7 +27,7 @@ function Display() {
         <StorageImage path={`upload/${id}`} />
       </div>
       <div>
-        <button onClick={navigate('/')}>Back</button>
+        <button onClick={() => navigate(-1)}>Back</button>
       </div>
     </div>
   );
