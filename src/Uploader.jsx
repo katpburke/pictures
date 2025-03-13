@@ -65,35 +65,19 @@ function Uploader() {
     updateUpload(false);
   };
 
-  //   const handleRandom = async () => {
-  //     const { data: items, errors } = await client.models.Numbers.list();
-  //     updateList(items);
-  //   };
-
-  //   useEffect(() => {
-  //     console.log('idList: ', idList);
-  //     if (idList.length > 0) {
-  //       let rand = Math.floor(Math.random() * idList.length);
-  //       console.log('random index chosen: ', rand);
-  //       navigate(`/images/${idList[rand].content}`);
-  //     }
-  //   }, [idList]);
-
   const handleRandom = async () => {
+    const { data: items, errors } = await client.models.Numbers.list();
+    updateList(items);
+  };
+
+  useEffect(() => {
     console.log('idList: ', idList);
     if (idList.length > 0) {
       let rand = Math.floor(Math.random() * idList.length);
       console.log('random index chosen: ', rand);
       navigate(`/images/${idList[rand].content}`);
     }
-  };
-
-  useEffect(() => {
-    async () => {
-      const { data: items, errors } = await client.models.Numbers.list();
-      updateList(items);
-    };
-  }, []);
+  }, [idList]);
 
   return (
     <div>
