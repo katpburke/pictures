@@ -14,9 +14,9 @@ function Display() {
   async function createUrl() {
     const tempUrl = await getUrl({
       path: `upload/${id}`,
-    }).url.toString();
-    console.log('tempUrl: ', tempUrl);
-    updateUrl(tempUrl);
+    });
+    console.log('tempUrl: ', tempUrl.url);
+    updateUrl(tempUrl.url);
   }
 
   return (
