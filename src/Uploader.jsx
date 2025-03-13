@@ -12,16 +12,16 @@ function Uploader() {
     setFile(e.target.files[0]);
   };
 
-  const existsId = async (id) => {
-    const { body } = await downloadData({
-      path: `upload/${id}`,
-    }).result;
+  //   const existsId = async (id) => {
+  //     const { body } = await downloadData({
+  //       path: `upload/${id}`,
+  //     }).result;
 
-    console.log('exists ID body: ', body);
+  //     console.log('exists ID body: ', body);
 
-    if (body) return false;
-    else return false;
-  };
+  //     if (body) return false;
+  //     else return false;
+  //   };
 
   const handleUpload = () => {
     if (!selectedFile) {
@@ -31,10 +31,10 @@ function Uploader() {
     let imgId = Math.floor(Math.random() * 1000000);
     console.log(imgId);
 
-    while (existsId(imgId)) {
-      imgId = Math.floor(Math.random() * 1000000);
-      console.log(imgId);
-    }
+    // while (existsId(imgId)) {
+    //   imgId = Math.floor(Math.random() * 1000000);
+    //   console.log(imgId);
+    // }
 
     uploadData({
       path: `upload/${imgId}`,
