@@ -1,33 +1,32 @@
 import { useState, useEffect } from 'react';
-import { downloadData } from 'aws-amplify/storage';
+import { downloadData, getUrl } from 'aws-amplify/storage';
 import { useParams } from 'react-router-dom';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
 
 function Display() {
-  //   const [img, updateImg] = useState(null);
   const { id } = useParams();
+  const [displayUrl, updateUrl] = useState('');
 
-  //   async function download() {
-  //     const { body } = await downloadData({
-  //       path: `upload/${id}`,
-  //     }).result;
-  //     updateImg(body);
-  //   }
+  useEffect(() => {
+    createUrl();
+  }, []);
 
-  //   useEffect(() => {
-  //     console.log('Download results: ', img);
-  //   }, [img]);
-
-  //   useEffect(() => {
-  //     download();
-  //   }, []);
+  async function createUrl() {
+    const tempUrl = await getUrl({
+      path: `upload/${id}`,
+    }).url.toString();
+    console.log('tempUrl: ', tempUrl);
+    updateUrl(tempUrl);
+  }
 
   return (
     <div>
       <div>Image #{id}</div>
       <div>
-        {/* <img src={img} /> */}
         <StorageImage path={`upload/${id}`} />
+      </div>
+      <div>
+        <a href={displayUrl}>Temporary Download Link</a>
       </div>
     </div>
   );

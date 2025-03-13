@@ -16,17 +16,6 @@ function Uploader() {
     setFile(e.target.files[0]);
   };
 
-  //   const existsId = async (id) => {
-  //     const { body } = await downloadData({
-  //       path: `upload/${id}`,
-  //     }).result;
-
-  //     console.log('exists ID body: ', body);
-
-  //     if (body) return false;
-  //     else return false;
-  //   };
-
   const addId = async (id) => {
     console.log('addId called!');
     await client.models.Numbers.create({
@@ -41,11 +30,6 @@ function Uploader() {
 
     let imgId = Math.floor(Math.random() * 1000000);
     console.log(imgId);
-
-    // while (existsId(imgId)) {
-    //   imgId = Math.floor(Math.random() * 1000000);
-    //   console.log(imgId);
-    // }
 
     uploadData({
       path: `upload/${imgId}`,
@@ -83,12 +67,16 @@ function Uploader() {
     <div>
       {!uploaded && (
         <div>
-          <input
-            type='file'
-            accept='image/*'
-            onChange={(e) => handleFileChange(e)}
-          />
-          <button onClick={handleRandom}>Random</button>
+          <div>
+            <input
+              type='file'
+              accept='image/*'
+              onChange={(e) => handleFileChange(e)}
+            />
+          </div>
+          <div>
+            <button onClick={handleRandom}>Random</button>
+          </div>
         </div>
       )}
       {selectedFile && (
