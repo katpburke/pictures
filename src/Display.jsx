@@ -24,7 +24,7 @@ function Display() {
 
   return (
     <div>
-      <div>Image #{id} will go here I promise</div>
+      <div>Image #{id}</div>
       <div>
         {/* <img src={img} /> */}
         <StorageImage path={`upload/${id}`} />
