@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { uploadData } from 'aws-amplify/storage';
 import { generateClient } from 'aws-amplify/data';
 
@@ -6,6 +6,7 @@ function Uploader() {
   const [selectedFile, setFile] = useState(null);
   const [uploaded, updateUpload] = useState(false);
   const [idUrl, updateIdUrl] = useState(null);
+  const [idList, updateList] = useState([]);
   //   const __dirname = path.resolve();
   const client = generateClient();
 
@@ -62,6 +63,15 @@ function Uploader() {
     updateUpload(false);
   };
 
+  const handleRandom = async () => {
+    const { data: items, errors } = await client.models.Numbers.list();
+    updateList(items);
+  };
+
+  useEffect(() => {
+    console.log('idList: ', idList);
+  }, [idList]);
+
   return (
     <div>
       {!uploaded && (
@@ -71,6 +81,7 @@ function Uploader() {
             accept='image/*'
             onChange={(e) => handleFileChange(e)}
           />
+          <button onClick={handleRandom}>Random</button>
         </div>
       )}
       {selectedFile && (
