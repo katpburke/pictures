@@ -17,7 +17,9 @@ function Uploader() {
       path: `upload/${id}`,
     }).result;
 
-    if (body) return true;
+    console.log('exists ID body: ', body);
+
+    if (body) return false;
     else return false;
   };
 
