@@ -9,7 +9,6 @@ function Uploader() {
   const [idUrl, updateIdUrl] = useState(null);
   const [idList, updateList] = useState([]);
   const navigate = useNavigate();
-  //   const __dirname = path.resolve();
   const client = generateClient();
 
   const handleFileChange = (e) => {
@@ -50,7 +49,7 @@ function Uploader() {
   };
 
   const handleRandom = async () => {
-    const { data: items, errors } = await client.models.Numbers.list();
+    const { data: items } = await client.models.Numbers.list();
     updateList(items);
   };
 
