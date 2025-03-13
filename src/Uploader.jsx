@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { uploadData, downloadData } from 'aws-amplify/storage';
-import { exists } from 'fs';
+import { uploadData } from 'aws-amplify/storage';
+import { generateClient } from 'aws-amplify/data';
 
 function Uploader() {
   const [selectedFile, setFile] = useState(null);
   const [uploaded, updateUpload] = useState(false);
   const [idUrl, updateIdUrl] = useState(null);
   //   const __dirname = path.resolve();
+  const client = generateClient();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -22,6 +23,13 @@ function Uploader() {
   //     if (body) return false;
   //     else return false;
   //   };
+
+  const addId = async (id) => {
+    console.log('addId called!');
+    await client.models.Numbers.create({
+      content: id,
+    });
+  };
 
   const handleUpload = () => {
     if (!selectedFile) {
@@ -44,14 +52,7 @@ function Uploader() {
       },
     });
 
-    uploadData({
-      path: `numbers/`,
-      data: imgId,
-      options: {
-        contentType: 'application/json',
-      },
-    });
-
+    addId(imgId);
     updateUpload(true);
     updateIdUrl(`https://main.d25557zczawwec.amplifyapp.com/images/${imgId}`);
   };
